@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Karwa Chauth for my Shalini 🌕❤️</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: radial-gradient(circle at 50% 30%, #2c1654 0%, #12072b 70%, #050112 100%);
+      color: #fff8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      transition: background 1.2s ease-in-out;
+    }
+
+    /* Velvet Moonlight Theme Overrides */
+    body.style-two {
+      background: linear-gradient(135deg, #4a0016 0%, #700024 40%, #a31d44 80%, #d6456b 100%);
+    }
+
+    /* Soft glowing moon */
+    .moon {
+      position: absolute;
+      top: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      height: 130px;
+      background: radial-gradient(circle at 35% 35%, #ffffff, #fff3cc 50%, #fcd667 90%);
+      border-radius: 50%;
+      box-shadow: 0 0 80px 25px rgba(253, 218, 118, 0.4);
+      z-index: 1;
+      opacity: 0.95;
+      transition: all 1.2s ease-in-out;
+    }
+
+    body.style-two .moon {
+      top: 5%;
+      width: 90px;
+      height: 90px;
+      box-shadow: 0 0 100px 40px rgba(255, 255, 255, 0.6);
+      background: #ffffff;
+    }
+
+    .floating {
+      position: absolute;
+      font-size: 1.8rem;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform, opacity;
+      animation: floatUp 12s infinite linear;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
+    }
+
+    .main-message {
+      font-size: 1.95rem;
+      line-height: 1.7;
+      max-width: 850px;
+      text-shadow: 2px 2px 12px rgba(0,0,0,0.6);
+      z-index: 2;
+      margin-bottom: 45px;
+      font-weight: 400;
+      animation: fadeInText 1s ease-out;
+    }
+
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    button {
+      font-size: 1.75rem;
+      padding: 14px 45px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    #yesBtn {
+      background: linear-gradient(135deg, #ff3366, #ff6699);
+      color: white;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 30px rgba(255, 51, 102, 0.5);
+    }
+
+    #noBtn {
+      background: #3a3a3a;
+      color: #999;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    #finalMessage {
+      display: none;
+      font-size: 2rem;
+      line-height: 1.7;
+      max-width: 850px;
+      z-index: 2;
+      text-shadow: 2px 2px 12px rgba(0,0,0,0.6);
+      animation: fadeInText 1.2s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="moon" id="moonNode"></div>
+
+  <div class="main-message" id="mainMessage">
+    My cutu Shalini 🌕❤️✨<br><br>
+   
+    Today, while you are keeping this fast for me… 🥰🌸<br>
+    I just want you to know how full my heart feels. 💖🦋<br><br>
+   
+    I feel so blessed to have you in my life. 👑🧸<br>
+    Out of so many people in this world, you chose me… ✨💕<br>
+    and that still feels unreal sometimes. 🥺💍<br><br>
+   
+    You are my peace, my home, and my favourite person. 🕊️✨<br>
+    The way you love, the way you care, the way you silently pray for me… 🥰❤️<br>
+    it touches me more than I can ever explain. 🌸🍭<br><br>
+   
+    You have made my life softer, warmer, and so much more beautiful. 🧸💖<br>
+    No one has ever loved me the way you do. ✨🦋<br>
+    You feel like the purest soul I have ever known. 👑🥺<br><br>
+   
+    Thank you for every prayer, every sacrifice, and every quiet wish you make for me. 💕🌸<br>
+    I don’t take any of it for granted. 🥰💍<br><br>
+   
+    Will you always stay with me like this, <b>my cutu my shona my chokru my dove my butterfly my queen my love my baby my putru my ladu my jaan my angel my goddess</b>? 🥺❤️🍭
+  </div>
+
+  <div class="buttons" id="buttons">
+    <button id="yesBtn">Next 💖 Next</button>
+    <button id="noBtn">No 😢</button>
+  </div>
+
+  <div id="finalMessage"></div>
+
+  <script>
+    // Smooth frame-optimized floating element generator
+    const floatingContainer = document.body;
+    const emojis = ['❤️', '🌕', '✨', '💖', '💫', '🦋', '🌸', '🥰'];
+   
+    function createFloatingEmoji(count) {
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.className = 'floating';
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.left = (Math.random() * 95) + 'vw';
+        el.style.animationDuration = (Math.random() * 6 + 8) + 's';
+        el.style.animationDelay = (Math.random() * 8) + 's';
+        fragment.appendChild(el);
+      }
+      floatingContainer.appendChild(fragment);
+    }
+
+    // Initialize first batch safely
+    createFloatingEmoji(25);
+
+    const yesBtn = document.getElementById('yesBtn');
+    const finalMessage = document.getElementById('finalMessage');
+    const mainMessage = document.getElementById('mainMessage');
+    const buttons = document.getElementById('buttons');
+
+    yesBtn.addEventListener('click', () => {
+      // Instantly change to the vibrant crimson/pink romantic style layout
+      document.body.classList.add('style-two');
+     
+      mainMessage.style.display = 'none';
+      buttons.style.display = 'none';
+
+      finalMessage.innerHTML = `
+        Yes… my special angel 🌕💖✨<br><br>
+        I am the luckiest person alive to have you by my side. 🥰🦋<br>
+        You are truly my absolute everything. 🌸🧸<br>
+        You have changed my life in the most beautiful way imaginable. 💕👑<br>
+        No one can ever love me the way you do. ✨💍<br>
+        You are the purest soul… a true goddess in my life. 🥺❤️<br><br>
+        I love you more than words will ever be enough to say. 🍭💖<br>
+        Thank you for being mine forever and ever, <br>
+        <b>my cutu my shona my chokru my dove my butterfly my queen my love my baby my putru my ladu my jaan my angel my goddess</b> 🥺❤️🌸
+      `;
+      finalMessage.style.display = 'block';
+
+      // Smoothly layer extra love emojis on page change without blocking the main browser thread
+      requestAnimationFrame(() => {
+        createFloatingEmoji(35);
+      });
+    });
+  </script>
+
+</body>
+</html>
